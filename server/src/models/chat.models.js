@@ -1,7 +1,12 @@
 import mongoose from 'mongoose';
 
 const chatSchema = new mongoose.Schema({
-  refreshToken : { type: String, required: true }, 
+    SessionId: {
+        type:mongoose.Schema.Types.ObjectId,
+        ref: "Session",
+        required: true,
+        unique: true,
+    },
   messages: [
     {
       role: {
