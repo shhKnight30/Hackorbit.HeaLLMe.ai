@@ -7,3 +7,4 @@
 ![Screenshot 2025-07-08 155315](https://github.com/user-attachments/assets/8e2a6475-edfa-413a-8956-11a283d486ea)
 
 @6pm 8/07/25 --> no updates
+@8pm 8/07/25 --> no updates .........figuring out about agentic ai model
