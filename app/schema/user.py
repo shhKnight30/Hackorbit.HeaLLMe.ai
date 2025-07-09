@@ -2,7 +2,7 @@ from pydantic import BaseModel, EmailStr, Field
 from typing import Optional, List
 from datetime import datetime
 
-# Base fields shared by all user schemas
+
 class UserBase(BaseModel):
     email: EmailStr
     username: str
@@ -15,16 +15,15 @@ class UserBase(BaseModel):
     allergies: Optional[List[str]] = []
     medications: Optional[List[str]] = []
 
-# For user registration
-class UserCreate(UserBase):
-    password: str  # plain password, not hashed
 
-# For login
+class UserCreate(UserBase):
+    password: str  
+
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
 
-# For returning user data in API responses (without password)
+
 class UserResponse(UserBase):
     id: str
     is_active: bool
@@ -33,7 +32,7 @@ class UserResponse(UserBase):
     updated_at: datetime
 
     class Config:
-        orm_mode = True  # enables reading from ORM or Mongo-like objects
+        orm_mode = True  
         schema_extra = {
             "example": {
                 "id": "507f1f77bcf86cd799439011",
@@ -54,7 +53,7 @@ class UserResponse(UserBase):
             }
         }
 
-# For updating user profile
+
 class UserUpdate(BaseModel):
     full_name: Optional[str] = None
     age: Optional[int] = None

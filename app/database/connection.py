@@ -27,7 +27,6 @@ async def get_database():
     """Get database instance"""
     return db.database
 
-# Collection names
 USERS_COLLECTION = "users"
 CHAT_SESSIONS_COLLECTION = "chat_sessions"
 CHAT_MESSAGES_COLLECTION = "chat_messages"
@@ -35,7 +34,7 @@ HEALTH_DATA_COLLECTION = "health_data"
 HEALTH_ANALYSIS_COLLECTION = "health_analysis"
 HEALTH_QUOTES_COLLECTION = "health_quotes"
 
-# Get collection references
+
 def get_users_collection():
     """Get users collection"""
     return db.database[USERS_COLLECTION] if db.database else None
@@ -60,18 +59,18 @@ def get_health_quotes_collection():
     """Get health quotes collection"""
     return db.database[HEALTH_QUOTES_COLLECTION] if db.database else None
 
-# Database indexes
+
 async def create_indexes():
     """Create database indexes for better performance"""
     try:
-        # Users collection indexes
+
         users_collection = get_users_collection()
         if users_collection:
             await users_collection.create_index("email", unique=True)
             await users_collection.create_index("username", unique=True)
             await users_collection.create_index("created_at")
         
-        # Chat sessions collection indexes
+
         chat_sessions_collection = get_chat_sessions_collection()
         if chat_sessions_collection:
             await chat_sessions_collection.create_index("user_id")
@@ -79,7 +78,7 @@ async def create_indexes():
             await chat_sessions_collection.create_index("last_activity")
             await chat_sessions_collection.create_index([("user_id", 1), ("last_activity", -1)])
         
-        # Chat messages collection indexes
+
         chat_messages_collection = get_chat_messages_collection()
         if chat_messages_collection:
             await chat_messages_collection.create_index("user_id")
@@ -87,14 +86,14 @@ async def create_indexes():
             await chat_messages_collection.create_index("timestamp")
             await chat_messages_collection.create_index([("session_id", 1), ("timestamp", -1)])
         
-        # Health data collection indexes
+
         health_data_collection = get_health_data_collection()
         if health_data_collection:
             await health_data_collection.create_index("user_id")
             await health_data_collection.create_index("date_recorded")
             await health_data_collection.create_index([("user_id", 1), ("date_recorded", -1)])
         
-        # Health analysis collection indexes
+
         health_analysis_collection = get_health_analysis_collection()
         if health_analysis_collection:
             await health_analysis_collection.create_index("user_id")
@@ -102,7 +101,6 @@ async def create_indexes():
             await health_analysis_collection.create_index("created_at")
             await health_analysis_collection.create_index([("user_id", 1), ("analysis_type", 1)])
         
-        # Health quotes collection indexes
         health_quotes_collection = get_health_quotes_collection()
         if health_quotes_collection:
             await health_quotes_collection.create_index("category")

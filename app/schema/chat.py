@@ -79,11 +79,12 @@ class ChatMessageRequest(BaseModel):
     message: str = Field(..., min_length=1, max_length=5000)
     message_type: str = Field("health_guidance", regex="^(health_guidance|symptom_check|health_advice)$")
 
-class ChatMessageResponse(BaseModel):
+class ChatMessageWithInsightsResponse(BaseModel):
     message: ChatMessageResponse
     ai_response: ChatMessageResponse
     health_insights: Optional[Dict[str, Any]] = {}
     recommendations: Optional[List[str]] = []
+
 
 class ChatSummary(BaseModel):
     session_id: str
